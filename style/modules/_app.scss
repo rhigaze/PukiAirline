@@ -1,0 +1,67 @@
+// Mobile
+@media(max-width:767px){
+
+}
+
+@media(min-width:768px){}
+@media(min-width:992px){}
+@media(min-width:1200px){}
+
+
+body {
+
+}
+
+
+header {
+    background: #372f45;
+    min-height: 56px;
+    text-align: center;
+    display:flex;
+    flex-flow: row wrap;
+    padding:10px;
+    margin-bottom: 10px;
+  h1 {
+    color:gold;
+  }
+  .navbar li {
+    float: left;
+    list-style: none;
+    margin: 20;
+    padding: 0 4px 0 0;
+  }
+  .navbar li a {
+    color: #34363d; 
+    text-decoration: none; 
+    display: block;
+    font-size: 1.4em;
+    font-weight: 700;
+    padding: 2px;
+    color: #34363d;
+    background-color: #5be2ed; 
+  }
+  a:visited {
+    color: #606;
+  }
+   .navbar {
+    clear: left;
+    float: left;
+    margin: 20px 0 0;
+}
+ .navbar .main-nav-icon {
+    background: url('../img/download.svg');
+    background-size: 24px;
+}
+}
+
+footer {
+  background-color: black;
+  text-align: center;
+  color: #777;
+}
+.btn-lg{
+      margin-top: 50px;
+}
+
+@import 'passenger';
+
