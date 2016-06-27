@@ -3,9 +3,11 @@
 const KEY_PASSENGERS = 'passengers';
 
 // This is a constructor function
-function Passenger(name, birthdate, id) {
-    this.name = name;
+function Passenger(firstName, lastName, birthdate, phone, id) {
+    this.firstName = firstName;
+    this.lastName = lastName;
     this.birthdate = new Date(birthdate);
+    this.phone = phone;
     this.pin = randomPin();
     this.id = (id) ? id : Passenger.nextId();
     this.flights= [];
@@ -42,7 +44,7 @@ Passenger.query = function () {
     let jsonPassengers = Passenger.loadJSONFromStorage();
 
     Passenger.passengers = jsonPassengers.map(jsonPassenger => {
-        return new Passenger(jsonPassenger.name, jsonPassenger.birthdate, jsonPassenger.id);
+        return new Passenger(jsonPassenger.firstName ,jsonPassenger.lastName, jsonPassenger.birthdate,jsonPassenger.phone  , jsonPassenger.id);
     })
 
     return Passenger.passengers;
@@ -53,11 +55,13 @@ Passenger.save = function (formObj) {
     let passenger;
     if (formObj.pid) {
         passenger = Passenger.findById(+formObj.pid);
-        passenger.name = formObj.pname;
+        passenger.firstName = formObj.pfname;
+        passenger.lastName = formObj.plname;
+        passenger.phone = formObj.phone;
         passenger.birthdate = new Date(formObj.pdate);
     } else {
-        passenger = new Passenger(formObj.pname, formObj.pdate);
-        passengers.push(passenger);
+        passenger = new Passenger(formObj.pfname , formObj.plname , formObj.pdate ,  formObj.phone);
+       passengers.push(passenger);
     }
     Passenger.passengers = passengers;
     saveToStorage(KEY_PASSENGERS, passengers);
@@ -78,7 +82,9 @@ Passenger.render = function () {
     var strHtml = passengers.map(p => {
             return `<tr onclick="Passenger.select(${p.id}, this)">
             <td>${p.id}</td>
-            <td>${p.name}</td>
+            <td>${p.firstName}</td>
+            <td>${p.lastName}</td>
+            <td>${p.phone}</td>
             <td>
                 ${moment(p.birthdate).format('DD-MM-YYYY')}
                 ${(p.isBirthday()) ? '<i class="glyphicon glyphicon-gift"></i>' : ''}
@@ -102,12 +108,14 @@ Passenger.select = function (pId, elRow) {
     $(elRow).addClass('active success');
     $('.details').show();
     let p = Passenger.findById(pId);
-    $('.pDetailsName').html(p.name);
+    $('.pDetailsName').html(p.firdtName + ' ' +p.lastName);
 }
 
 
 Passenger.savePassenger = function () {
     var formObj = $('form').serializeJSON();
+    console.log('formObj' , formObj);
+    
     Passenger.save(formObj);
     Passenger.render();
     $('#modalPassenger').modal('hide');
@@ -115,13 +123,18 @@ Passenger.savePassenger = function () {
 Passenger.editPassenger = function (pId, event) {
     if (event) event.stopPropagation();
     if (pId) {
+        alert(pId);
         let passenger = Passenger.findById(pId);
         $('#pid').val(passenger.id);
-        $('#pname').val(passenger.name);
+        $('#pfname').val(passenger.firstName);
+        $('#plname').val(passenger.lastName);
+        $('#phone').val(passenger.phone);
         $('#pdate').val(moment(passenger.birthdate).format('YYYY-MM-DD'));
     } else {
         $('#pid').val('');
-        $('#pname').val('');
+        $('#pfname').val('');
+        $('#plname').val('');
+        $('#phone').val('');
         $('#pdate').val('');
     }
 
