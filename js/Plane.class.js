@@ -6,7 +6,8 @@ $(document).ready(()=>{
 
     Plane.render();
 
-});// This is a constructor function
+});
+// This is a constructor function
 function Plane(model, sitsCount, id) {
     this.model = model;
     this.sitsCount = +sitsCount;
@@ -145,35 +146,11 @@ Plane.editPlane = function (pId, event) {
 Plane.prototype.updateSeats =  function(){
     
 }
-// Plane.prototype.addFlight = function (flight){
-//     console.log('Flight to add', flight);
-    
-//     if(this.flight) {
-//         if(!this.flights.includes(flight)) this.flights.push(flight);
-//     }
-//     else {
-//         this.flights = [] ;
-//         this.flights.push(flight);
-//     }
-// }
 Plane.prototype.getAllFlights = function(){
     let flights = Flight.query();
     let planeFlights = flights.filter(f => f.plane === this.id)
     return planeFlights;
 }
-// instance methods:
-/*
-Plane.prototype.isBirthday = function () {
-    let now = new Date();
-    return (this.birthdate.getMonth() === now.getMonth() &&
-        this.birthdate.getDate() === now.getDate());
-}
-
-
-Plane.prototype.checkPin = function (pin) {
-    return pin === this.pin;
-}
-*/
 
 
 

@@ -141,7 +141,12 @@ Passenger.prototype.checkPin = function (pin) {
     return pin === this.pin;
 }
 Passenger.prototype.addFlight = function (flight) {
-    this.flights.push(flight);
+    this.flights.push(flight.id);
+}
+Passenger.prototype.getAllFlights = function (){
+    let flights = Flight.query();
+    let passengerFlights = flights.filter(f => f.passengers.includes(this.id));
+    return passengerFlights;
 }
 Passenger.prototype.removeFlight = function (flight) {
     if(this.flights){
