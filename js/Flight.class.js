@@ -71,7 +71,6 @@ Flight.findById = function (id) {
     return result;
 }
 Flight.render = function () {
-	debugger;
     var flights = Flight.query();
     var strHtml = flights.map(f => {
         return `<tr>
