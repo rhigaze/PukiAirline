@@ -102,11 +102,17 @@ Plane.render = function () {
 }
 
 Plane.select = function (pId, elRow) {
-    $('.active').removeClass('active success');
+    $('.active.success').removeClass('active success');
     $(elRow).addClass('active success');
     $('.details').show();
     let p = Plane.findById(pId);
-    $('.pDetailsName').html(p.name);
+    //$('.pDetailsName').html(pId);
+	//Flight.render(pId)
+	//console.log(p.getAllFlights());
+	let flights=p.getAllFlights();
+	//console.log(flights[0])
+	//console.log(flights.map(f => f.renderHTML()).join(' '));
+	$('.tblFlightsOfPlane').html(flights.map(f => f.renderHTML()).join(' '));
 }
 
 

@@ -55,7 +55,7 @@
                 <!-- Button trigger modal -->
                 <button onclick="Flight.edit()" class="btn btn-primary btn-lg">
                     <span class="glyphicon glyphicon-plus"></span>
-                    Add Passenger
+                    Add Flight
                 </button>
             </div>
         </main> 
@@ -102,9 +102,10 @@
                             </div>
                             <div class="form-group">
                                 <!--<input type="text" id="plane" name="plane" >-->
-                                    <input id="planeId" class="form-group" list="plane" name="plane" required>
+                                    <select id="planeId" class="form-group" list="plane" name="plane" required>
                                     <datalist id="plane">
                                     </datalist>
+									</select>
                             </div>
                             
                         </form>
