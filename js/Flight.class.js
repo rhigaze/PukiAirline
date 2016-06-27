@@ -71,6 +71,7 @@ Flight.findById = function (id) {
     return result;
 }
 Flight.render = function () {
+	debugger;
     var flights = Flight.query();
     var strHtml = flights.map(f => {
         return `<tr>
@@ -87,7 +88,7 @@ Flight.render = function () {
                         <i class="glyphicon glyphicon-edit"></i>
                     </button>
                 </td>
-                </tr>` }).join()
+                </tr>` }).join();
 
     $('.tblFlight').html(strHtml);
 }
@@ -107,7 +108,7 @@ Flight.edit = function (pId, event) {
         $('#from').val(flight.src);
         $('#to').val(flight.to);
         $('#pdate').val(moment(flight.date).format('YYYY-MM-DD'));
-        $('#plane').val(flight.plane);
+        $('#planeId').val(flight.plane);
     } else {
         $('#pid').val('');
         $('#from').val('');
@@ -123,9 +124,9 @@ Flight.edit = function (pId, event) {
 Flight.getAllPlane = function(){
     let planes = Plane.query();
     let planeOption = planes.map(p => {
-        return `<option value="${p.id}" ></option>`;
+        return `<option value="${p.id}" >${p.id}(${p.model})</option>`;
     }).join('')
-    $('#plane').html(planeOption);  
+    $('#planeId').html(planeOption);  
     
 }
 Flight.addPassengerToFlight = function(flightId , passId){
@@ -138,7 +139,8 @@ Flight.addPassengerToFlight = function(flightId , passId){
 Flight.prototype.addPassenger = function(passenger){
    
     this.passengers.push(passenger.id)
-  }
+}
+  
 Flight.prototype.removePassenger = function (passenger) {
     if(this.passengers){
         let index = this.passengers.indexOf(passenger);
@@ -146,3 +148,11 @@ Flight.prototype.removePassenger = function (passenger) {
     }
 }
 
+Flight.prototype.renderHTML = function() {
+        return `<tr>
+                <td>${this.id} </td>
+                <td>${this.src}</td>
+                <td>${this.to}</td>
+                <td>${moment(this.pdate).format('DD-MM-YYYY')}</td>
+                </tr>` 	
+}
