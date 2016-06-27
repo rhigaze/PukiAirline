@@ -175,7 +175,6 @@ Flight.prototype.renderHTMLforReservation = function() {
                     </button>
                 </td>
 
-                </tr>` 	
-
-				}
+                </tr>`
+}
 
