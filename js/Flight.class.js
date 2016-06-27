@@ -70,8 +70,12 @@ Flight.findById = function (id) {
     if (flights.length) result = flights[0];
     return result;
 }
+
+Flight.findBySourceAndDest = function (src,to) {
+    return Flight.query().filter(f => f.src === src&&f.to===to);
+}
 Flight.render = function () {
-	debugger;
+	//debugger;
     var flights = Flight.query();
     var strHtml = flights.map(f => {
         return `<tr>
@@ -156,3 +160,22 @@ Flight.prototype.renderHTML = function() {
                 <td>${moment(this.pdate).format('DD-MM-YYYY')}</td>
                 </tr>` 	
 }
+
+Flight.prototype.renderHTMLforReservation = function() {
+        return `<tr>
+                <td>${this.id} </td>
+                <td>${this.src}</td>
+                <td>${this.to}</td>
+                <td>${moment(this.pdate).format('DD-MM-YYYY')}</td>
+				<td>${this.plane}</td>
+				<td>this.getAvailableSeats()</td>				
+                <td>
+                    <button class="btn btn-info" onclick="makeReservation(${this.id})">
+                        Make reservation
+                    </button>
+                </td>
+
+                </tr>` 	
+
+				}
+
